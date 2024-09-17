@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Person from './Person';
 import "../style/styleindex.css";
 
 class App extends Component {
