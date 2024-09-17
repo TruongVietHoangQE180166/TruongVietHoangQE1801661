@@ -1,0 +1,8 @@
+import "../style/styleindex.css";
+
+
+import React from "react";
+function HelloWorld() {
+  return <h2>Hello, World!</h2>;
+}
+export default HelloWorld;
