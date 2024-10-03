@@ -1,10 +1,14 @@
-
+import React, { useState } from "react";
 import { Row, Col, Form, Button } from "react-bootstrap";
+import { FaStar } from "react-icons/fa";
 
 function ReservationForm() {
+  const [rating, setRating] = useState(0);
+  const [hover, setHover] = useState(0);
+
   return (
     <div className="container p-5">
-      <h2 className="text-center mt-3 mb-4">Book your table</h2>
+      <h2 className="text-center mt-3 mb-4">Feedback</h2>
       <Form>
         <Row className="mb-3">
           <Col>
@@ -20,26 +24,52 @@ function ReservationForm() {
             </Form.Group>
           </Col>
           <Col>
-            <Form.Group controlId="formServer">
-              <Form.Label>Select a Server</Form.Label>
-              <Form.Control as="select" defaultValue="Choose...">
-                <option>Choose...</option>
-                <option>Server 1</option>
-                <option>Server 2</option>
-                <option>Server 3</option>
-              </Form.Control>
+            <Form.Group controlId="formPhone">
+              <Form.Label>Your phone number</Form.Label>
+              <Form.Control type="tel" placeholder="Enter your phone number" />
+            </Form.Group>
+          </Col>
+        </Row>
+        <Row className="mb-3">
+          <Col>
+            <Form.Group controlId="formRating">
+              <Form.Label>Rating</Form.Label>
+              <div>
+                {[...Array(5)].map((star, index) => {
+                  const ratingValue = index + 1;
+                  return (
+                    <label key={index}>
+                      <input
+                        type="radio"
+                        name="rating"
+                        value={ratingValue}
+                        onClick={() => setRating(ratingValue)}
+                        style={{ display: "none" }}
+                      />
+                      <FaStar
+                        className="star"
+                        color={ratingValue <= (hover || rating) ? "#ffc107" : "#e4e5e9"}
+                        size={30}
+                        onMouseEnter={() => setHover(ratingValue)}
+                        onMouseLeave={() => setHover(0)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </label>
+                  );
+                })}
+              </div>
             </Form.Group>
           </Col>
         </Row>
         <Row className="mb-3">
           <Col>
             <Form.Group controlId="formTextArea">
-              <Form.Label>Additional Requests</Form.Label>
+              <Form.Label>Comment</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
-                placeholder="Enter any additional requests"
-              ></Form.Control>
+                placeholder="Enter your feedback"
+              />
             </Form.Group>
           </Col>
         </Row>

@@ -1,21 +1,22 @@
-import { useState } from "react";
-import "../Style/StyleIndex.css";
-import { Card, Button } from "react-bootstrap";
+import React from 'react';
+import "../Style/StyleIndex.css"; // Giả sử bạn có CSS cho styling
+import { Button } from "react-bootstrap";
 import menu1 from "../assets/images/menu1.jpg";
 import menu2 from "../assets/images/menu2.jpg";
 import menu3 from "../assets/images/menu3.jpg";
 import menu4 from "../assets/images/menu4.jpg";
-import menu5 from "../assets/images/menu5.jpg"; 
-import menu6 from "../assets/images/menu6.jpg"; 
-import menu7 from "../assets/images/menu7.jpg"; 
-import menu8 from "../assets/images/menu8.jpg"; 
+import menu5 from "../assets/images/menu5.jpg";
+import menu6 from "../assets/images/menu6.jpg";
+import menu7 from "../assets/images/menu7.jpg";
+import menu8 from "../assets/images/menu8.jpg";
 import { useNavigate } from "react-router-dom";
+import Pizzacomponent from "./Pizza"; // Import Pizzacomponent
 
-function CardComponent() {
+function CardComponent({ addToCart }) {
   const navigate = useNavigate();
-
+  
   const handleShowMore = () => {
-    navigate('/full-menu');
+    navigate('/full-menu'); // Chuyển hướng đến trang full-menu
   };
 
   const pizzas = [
@@ -35,19 +36,7 @@ function CardComponent() {
 
       <div className="row">
         {pizzas.map((pizza, index) => (
-          <div key={index} className="col-md-3 mb-3">
-            <Card>
-              <div style={{ position: 'relative' }}>
-                <Card.Img variant="top" src={pizza.img} />
-                {pizza.onSale && <span className="card-sale-tag">SALE</span>}
-              </div>
-              <Card.Body>
-                <Card.Title>{pizza.title}</Card.Title>
-                <Card.Text>Price: {pizza.price}</Card.Text>
-                <Button variant="dark" className="w-100 text-center">Buy</Button>
-              </Card.Body>
-            </Card>
-          </div>
+          <Pizzacomponent key={index} pizza={pizza} addToCart={addToCart} />
         ))}
       </div>
 
